@@ -56,7 +56,6 @@ namespace Project.State
 
             if (characterControl.moveLeft)
             {
-                Debug.Log("left");
                 characterControl.FaceForward(false);
                 if (!checkFront(characterControl))
                 {
@@ -66,7 +65,6 @@ namespace Project.State
 
             if (characterControl.moveRight)
             {
-                Debug.Log("right");
                 characterControl.FaceForward(true);
                 if (!checkFront(characterControl))
                 {

@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5348418534076026422}
   - component: {fileID: 4778565316024894645}
+  - component: {fileID: 8896334493451752237}
   m_Layer: 0
-  m_Name: Attack Info
+  m_Name: AttackInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,3 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8d36ff271cf704eaef86c7f3e18e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAttacks: []
+--- !u!114 &8896334493451752237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7804728713547712023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d44981592ddff454b96b6c2bf9100d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attacker: {fileID: 0}
+  attackAbility: {fileID: 0}
+  colliderNames: []
+  mustCollide: 0
+  mustFaceAttacker: 0
+  lethalRange: 0
+  maxHits: 0
+  currentHits: 0
+  isRegistered: 0
+  isFinished: 0

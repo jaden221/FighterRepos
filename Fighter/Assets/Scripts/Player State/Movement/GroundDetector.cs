@@ -25,12 +25,10 @@ namespace Project.State
             {
                 if (isGrounded(characterControl))
                 {
-                    Debug.Log("true");
                     animator.SetBool(TransitionParameter.Grounded.ToString(), true);
                 }
                 else
                 {
-                    Debug.Log("false");
                     animator.SetBool(TransitionParameter.Grounded.ToString(), false);
                 }
             }
@@ -45,7 +43,6 @@ namespace Project.State
         {
             foreach (GameObject obj in control.groundSpheres)
             {
-                Debug.Log("Starting it");
                 Debug.DrawRay(obj.transform.position, Vector3.down * distance);
                 if (Physics.Raycast(obj.transform.position, Vector3.down, distance, LayerMask.GetMask("Ground")))
                 {
