@@ -18,10 +18,12 @@ namespace Project.State
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterControl = characterState.GetCharacterControl(animator);
+            Debug.Log(characterControl + "Walk START");
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            Debug.Log(characterControl.gameObject.name + " WALK Update");
             if (characterControl.jump)
             {
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
@@ -59,6 +61,7 @@ namespace Project.State
                 characterControl.FaceForward(false);
                 if (!checkFront(characterControl))
                 {
+                    Debug.Log(characterControl + "Walk UPDATE");
                     characterControl.MoveForward(speedGraph,stateInfo,speed);
                 }
             }
@@ -68,6 +71,7 @@ namespace Project.State
                 characterControl.FaceForward(true);
                 if (!checkFront(characterControl))
                 {
+                    Debug.Log(characterControl + "Walk UPDATE");
                     characterControl.MoveForward(speedGraph, stateInfo, speed);
                 }
             }

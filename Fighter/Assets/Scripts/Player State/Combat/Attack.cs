@@ -9,17 +9,22 @@ namespace Project.State
     [CreateAssetMenu(fileName = "New State", menuName = "States/AbilityData/Attack")]
     public class Attack : StateData
     {
+        [Header("Window of Attack (Percent)")]
         public float startAttackTime;
         public float endAttackTime;
-        public List<string> colliderNames = new List<string>();
-        public List<RuntimeAnimatorController> deathAnimators = new List<RuntimeAnimatorController>();
 
+        [Header("Misc Values")]
         public bool mustCollide;
         public bool mustFaceAttacker;
         public float lethalRange;
         public int maxHits;
 
+        [Header("Lists")]
+        public List<string> colliderNames = new List<string>();
+        public List<RuntimeAnimatorController> deathAnimators = new List<RuntimeAnimatorController>();
+
         CharacterControl characterControl;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterControl = characterState.GetCharacterControl(animator);
@@ -44,7 +49,7 @@ namespace Project.State
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
+            ClearAttack();
         }
 
         public void RegisterAttack(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -87,7 +92,7 @@ namespace Project.State
 
         public void ClearAttack()
         {
-            for (int i = 0; i <AttackManager.Instance.currentAttacks.Count; i++)
+            for (int i = 0; i < AttackManager.Instance.currentAttacks.Count; i++)
             {
                 if (AttackManager.Instance.currentAttacks[i] == null || AttackManager.Instance.currentAttacks[i].isFinished)
                 {
