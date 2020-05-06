@@ -20,7 +20,6 @@ namespace Project.State
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //Debug.Log("" + stateInfo.normalizedTime);
             if (stateInfo.normalizedTime >= checkTime)
             {
                 if (isGrounded(characterControl))

@@ -25,9 +25,6 @@ namespace Project.State
         {
             characterControl.gravityMultiplier = gravity.Evaluate(stateInfo.normalizedTime);
             characterControl.pullMultiplier = pull.Evaluate(stateInfo.normalizedTime);
-            //Debug.Log(characterControl.gameObject.name + " JUMP Update");
-            //Debug.Log(animator.gameObject.name + " Pulling name from animator");
-            //Debug.Log(characterControl + " thingy");
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

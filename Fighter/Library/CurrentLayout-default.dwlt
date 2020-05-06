@@ -138,8 +138,8 @@ MonoBehaviour:
     y: 30
     width: 2560
     height: 1304
-  m_MinSize: {x: 781, y: 342}
-  m_MaxSize: {x: 16006, y: 8042}
+  m_MinSize: {x: 781, y: 492}
+  m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
   controlID: 192
 --- !u!114 &7
@@ -163,8 +163,8 @@ MonoBehaviour:
     y: 0
     width: 2010
     height: 1304
-  m_MinSize: {x: 505, y: 342}
-  m_MaxSize: {x: 12005, y: 8042}
+  m_MinSize: {x: 505, y: 492}
+  m_MaxSize: {x: 14003, y: 14042}
   vertical: 1
   controlID: 122
 --- !u!114 &8
@@ -293,10 +293,10 @@ MonoBehaviour:
     y: 701
     width: 2010
     height: 603
-  m_MinSize: {x: 203, y: 121}
-  m_MaxSize: {x: 8003, y: 4021}
+  m_MinSize: {x: 333, y: 271}
+  m_MaxSize: {x: 14003, y: 10021}
   vertical: 0
-  controlID: 60
+  controlID: 147
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -316,14 +316,14 @@ MonoBehaviour:
     y: 0
     width: 848
     height: 603
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 20}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
   - {fileID: 20}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -531,9 +531,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.15820312, y: 3.146653, z: 2.100189}
+    m_Target: {x: -0.07421875, y: 1.1400535, z: 1.9856097}
     speed: 2
-    m_Value: {x: -0.15820312, y: 3.146653, z: 2.100189}
+    m_Value: {x: -0.07421875, y: 1.1400535, z: 1.9856097}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -583,9 +583,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 6.6787186
+    m_Target: 8.251323
     speed: 2
-    m_Value: 6.6787186
+    m_Value: 8.251323
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -675,19 +675,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Animation/Mixamo Animations
+    - Assets/Scripts/Combat
   m_ViewMode: 1
   m_StartGridSize: 80
   m_LastFolders:
-  - Assets/Animation/Mixamo Animations
+  - Assets/Scripts/Combat
   m_LastFoldersGridSize: 80
   m_LastProjectPath: C:\Users\jonat\Desktop\GitHubThing\FighterRepos\Fighter
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 02370000
-    m_LastClickedID: 14082
+    m_SelectedIDs: 1a370000
+    m_LastClickedID: 14106
     m_ExpandedIDs: 00000000d6360000d8360000da360000dc360000de360000e0360000e2360000e4360000e636000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -890,7 +890,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 13258
+  m_LastSelectedObjectID: 13456
 --- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52

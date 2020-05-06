@@ -18,7 +18,6 @@ namespace Project.State
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //Debug.Log(characterControl.gameObject.name + " LANDING Update");
             characterControl.myRigidbody.velocity = Vector3.zero;
         }
 
