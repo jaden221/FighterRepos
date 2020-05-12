@@ -18,6 +18,7 @@ namespace Project.State
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterControl = characterState.GetCharacterControl(animator);
             characterControl.myRigidbody.velocity = Vector3.zero;
         }
 

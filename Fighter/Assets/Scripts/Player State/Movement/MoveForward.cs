@@ -18,14 +18,15 @@ namespace Project.State
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterControl = characterState.GetCharacterControl(animator);
-            Debug.Log(characterControl.gameObject.name + "From characterControl START ");
-            Debug.Log(animator.gameObject.name + "From animator START");
+            //Debug.Log(characterControl.gameObject.name + "From characterControl START ");
+            //Debug.Log(animator.gameObject.name + "From animator START");
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            Debug.Log(characterControl.gameObject.name + "From characterControl UPDATE");
-            Debug.Log(animator.gameObject.name + "From animator UPDATE");
+            characterControl = characterState.GetCharacterControl(animator);
+            //Debug.Log(characterControl.gameObject.name + "From characterControl UPDATE");
+            //Debug.Log(animator.gameObject.name + "From animator UPDATE");
             if (characterControl.jump)
             {
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
