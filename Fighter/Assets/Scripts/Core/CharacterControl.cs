@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Project.Core;
+using Project.State;
 using System;
 
 public enum TransitionParameter
@@ -36,6 +36,7 @@ namespace Project.Core
         [Header("Gameplay")]
         public float gravityMultiplier;
         public float pullMultiplier;
+        public float blockDistance;
 
         [Header("Components")]
         [HideInInspector] public Rigidbody myRigidbody;
@@ -202,6 +203,56 @@ namespace Project.Core
             {
                 return false;
             }
+        }
+
+        public void CacheCharacterControl(Animator animator)
+        {
+            CharacterState[] arr = animator.GetBehaviours<CharacterState>();
+
+            foreach (CharacterState c in arr)
+            {
+                c.characterControl = this;
+            }
+        }
+
+
+        public bool checkFront()
+        {
+            foreach (GameObject obj in frontSpheres)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(obj.transform.position, Vector3.forward, out hit, blockDistance, LayerMask.GetMask("Ground")))
+                {
+                    if (!ragdollParts.Contains(hit.collider))
+                    {
+                        if (!IsBodyPart(hit.collider))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        //Change Control reference to this
+        public bool IsBodyPart(Collider col)
+        {
+            CharacterControl control = col.transform.root.GetComponent<CharacterControl>();
+            if (control == null)
+            {
+                return false;
+            }
+            if (control.gameObject == col.gameObject)
+            {
+                return false;
+            }
+
+            if (control.ragdollParts.Contains(col))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
