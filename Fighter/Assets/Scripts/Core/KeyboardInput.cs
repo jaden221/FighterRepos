@@ -45,6 +45,15 @@ namespace Project.Core
             {
                 VirtualInputManager.Instance.attack = false;
             }
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                VirtualInputManager.Instance.strafe = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.strafe = false;
+            }
         }
     }
 }

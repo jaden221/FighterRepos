@@ -50,7 +50,14 @@ namespace Project.Core
             {
                 characterControl.attack = false;
             }
-
+            if (VirtualInputManager.Instance.strafe)
+            {
+                characterControl.strafe = true;
+            }
+            else
+            {
+                characterControl.strafe = false;
+            }
         }
     }
 

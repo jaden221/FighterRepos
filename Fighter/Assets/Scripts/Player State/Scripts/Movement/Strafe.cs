@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Project.Core;
 
 namespace Project.State
 {
-    [CreateAssetMenu(fileName = "New State", menuName = "States/AbilityData/MoveForward")]
+    [CreateAssetMenu(fileName = "New State", menuName = "States/AbilityData/Strafe")]
     public class Strafe : StateData
     {
         public AnimationCurve speedGraph;
@@ -18,32 +17,25 @@ namespace Project.State
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.moveLeft && characterState.characterControl.moveRight)
+            if (characterState.characterControl.moveLeft && characterState.characterControl.strafe)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), false);
-                return;
+                characterState.characterControl.FaceForward(true);
+                characterState.characterControl.MoveForward(speedGraph, stateInfo, -speed);
             }
-
-            if (!characterState.characterControl.moveLeft && !characterState.characterControl.moveRight)
-            {
-                animator.SetBool(TransitionParameter.Move.ToString(), false);
-            }
-
-            if (characterState.characterControl.moveLeft)
+            if (characterState.characterControl.moveRight && characterState.characterControl.strafe)
             {
                 characterState.characterControl.FaceForward(false);
-                if (!characterState.characterControl.checkFront())
-                {
-                    characterState.characterControl.MoveForward(speedGraph, stateInfo, speed);
-                }
+                characterState.characterControl.MoveForward(speedGraph, stateInfo, -speed);
+            }
+            else if (!characterState.characterControl.strafe)
+            {
+                animator.SetBool(TransitionParameter.Strafe.ToString(), false);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
+            
         }
-
     }
 }
-

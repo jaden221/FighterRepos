@@ -11,6 +11,7 @@ public enum TransitionParameter
     ForceTransition,
     Grounded,
     Attack,
+    Strafe,
 }
 
 namespace Project.Core
@@ -21,11 +22,12 @@ namespace Project.Core
         [Header("Colliders")]
         public GameObject colliderEdgePrefab;
 
-        [Header("Controls")]
+        [Header("ControlsFromManualInput")]
         public bool moveRight;
         public bool moveLeft;
         public bool jump;
         public bool attack;
+        public bool strafe;
 
         [Header("Lists")]
         public List<GameObject> groundSpheres = new List<GameObject>();
@@ -37,12 +39,13 @@ namespace Project.Core
         public float gravityMultiplier;
         public float pullMultiplier;
         public float blockDistance;
+        public float dodgeVelocity;
 
         [Header("Components")]
         [HideInInspector] public Rigidbody myRigidbody;
         [HideInInspector] public Animator SkinnedMeshAnimator;
 
-        void Awake()
+        private void Awake()
         {
             myRigidbody = GetComponent<Rigidbody>();
             SkinnedMeshAnimator = GetComponent<Animator>();
@@ -215,7 +218,6 @@ namespace Project.Core
             }
         }
 
-
         public bool checkFront()
         {
             foreach (GameObject obj in frontSpheres)
@@ -225,7 +227,7 @@ namespace Project.Core
                 {
                     if (!ragdollParts.Contains(hit.collider))
                     {
-                        if (!IsBodyPart(hit.collider))
+                        if (!isBodyPart(hit.collider))
                         {
                             return true;
                         }
@@ -236,7 +238,7 @@ namespace Project.Core
         }
 
         //Change Control reference to this
-        public bool IsBodyPart(Collider col)
+        public bool isBodyPart(Collider col)
         {
             CharacterControl control = col.transform.root.GetComponent<CharacterControl>();
             if (control == null)
@@ -253,6 +255,15 @@ namespace Project.Core
                 return true;
             }
             return false;
+        }
+
+        public bool isStandingStill()
+        {
+            if ((moveLeft && moveRight) || (!moveLeft && !moveRight))
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }

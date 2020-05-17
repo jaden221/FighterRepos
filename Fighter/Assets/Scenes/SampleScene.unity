@@ -1242,6 +1242,7 @@ MonoBehaviour:
   moveLeft: 0
   jump: 0
   attack: 0
+  strafe: 0
   groundSpheres: []
   frontSpheres: []
   ragdollParts: []
@@ -1249,6 +1250,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   pullMultiplier: 0
   blockDistance: 0.05
+  dodgeVelocity: 0
   myRigidbody: {fileID: 0}
   SkinnedMeshAnimator: {fileID: 0}
 --- !u!114 &901697681
@@ -1988,7 +1990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1492250923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2031,6 +2033,7 @@ MonoBehaviour:
   moveLeft: 0
   jump: 0
   attack: 0
+  strafe: 0
   groundSpheres: []
   frontSpheres: []
   ragdollParts: []
@@ -2038,6 +2041,7 @@ MonoBehaviour:
   gravityMultiplier: 0
   pullMultiplier: 0
   blockDistance: 0.05
+  dodgeVelocity: 0
   myRigidbody: {fileID: 0}
   SkinnedMeshAnimator: {fileID: 0}
 --- !u!95 &1492250926
