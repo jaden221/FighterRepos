@@ -7,7 +7,6 @@ namespace Project.State
     [CreateAssetMenu(fileName = "New State", menuName = "States/AbilityData/Idle")]
     public class Idle : StateData
     {
-        CheckStrafeOrDodge checkStrafeOrDodge = null;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -19,22 +18,6 @@ namespace Project.State
             if (characterState.characterControl.attack)
             {
                 animator.SetBool(TransitionParameter.Attack.ToString(), true);
-            }
-
-            if (characterState.characterControl.jump)
-            {
-                animator.SetBool(TransitionParameter.Jump.ToString(), true);
-            }
-
-            if (characterState.characterControl.isStandingStill() && !characterState.characterControl.strafe)
-            {
-                animator.SetBool(TransitionParameter.Move.ToString(), false);
-                return;
-            }
-
-            if (!characterState.characterControl.isStandingStill() && !characterState.characterControl.strafe)
-            {
-                animator.SetBool(TransitionParameter.Move.ToString(), true);
             }
         }
 
