@@ -9,32 +9,25 @@ namespace Project.State
     {
         public float windowToDodge;
         float timeToDodge;
-        
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             timeToDodge = 0;
-            //Make a check that checks if this characterState has Strafe or not which will determine what approach to take? Or keep it in strafe probably...
+            animator.SetBool(TransitionParameter.DodgeBackward.ToString(), false);
+            animator.SetBool(TransitionParameter.DodgeForward.ToString(), false);
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             IncreaseTimeToDodge(characterState);
-
-            if (isStrafing() && !characterState.characterControl.isStandingStill()) 
-            {
-                animator.SetBool(TransitionParameter.Strafe.ToString(), true);
-            }
-
-            if (!isStrafing() || characterState.characterControl.isStandingStill()) 
-            {
-                animator.SetBool(TransitionParameter.Strafe.ToString(), false);
-            }
+            Strafe(characterState, animator);
+            Dodge(characterState, animator);
+            // if holding direction and is dodging then turn on canBackstepLeft or canBackstepRight depending on which one
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
+            
         }
 
         /// <summary>
@@ -43,28 +36,61 @@ namespace Project.State
         /// <param name="windowToDodge"></param>
         /// <param name="timeToDodge"></param>
         /// <returns></returns>
-        public bool isStrafing()
+        private bool isStrafing()
         {
             if (timeToDodge > windowToDodge)
             {
                 return true;
             }
             else return false;
-            
         }
 
-        public bool isDodging(CharacterState characterState)
+        private void Strafe(CharacterState characterState, Animator animator)
+        {
+            if (isStrafing() && !characterState.characterControl.isStandingStill())
+            {
+                animator.SetBool(TransitionParameter.Strafe.ToString(), true);
+            }
+
+            if (!isStrafing() || characterState.characterControl.isStandingStill())
+            {
+                animator.SetBool(TransitionParameter.Strafe.ToString(), false);
+            }
+        }
+
+        private bool isDodging(CharacterState characterState)
         {
             if (timeToDodge < windowToDodge && timeToDodge > Mathf.Epsilon && characterState.characterControl.strafe == false)
             {
-                Debug.Log("Got to 2nd IF ");
-                timeToDodge = 0;
                 return true;
             }
             else return false;
         }
 
-        public void  IncreaseTimeToDodge(CharacterState characterState)
+        private void Dodge(CharacterState characterState, Animator animator)
+        {
+            if (isDodging(characterState) && characterState.characterControl.isStandingStill())
+            {
+                animator.SetBool(TransitionParameter.DodgeBackward.ToString(), true);
+            }
+
+            if (isDodging(characterState) && !characterState.characterControl.isStandingStill())
+            {
+                animator.SetBool(TransitionParameter.DodgeForward.ToString(), true);
+            }
+
+            if (isDodging(characterState) && characterState.characterControl.moveLeft)
+            {
+                animator.SetBool(TransitionParameter.DodgeBackward.ToString(), true);
+            }
+
+            if (isDodging(characterState) && characterState.characterControl.moveRight)
+            {
+                animator.SetBool(TransitionParameter.DodgeBackward.ToString(), true);
+            }
+        }
+
+        private void  IncreaseTimeToDodge(CharacterState characterState)
         {
             if (characterState.characterControl.strafe)
             {

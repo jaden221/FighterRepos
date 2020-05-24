@@ -14,6 +14,7 @@ namespace Project.State
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             animator.SetBool(TransitionParameter.ForceTransition.ToString(), false);
+            animator.speed = 1;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

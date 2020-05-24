@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: CheckStrafeOrDodge
   m_EditorClassIdentifier: 
   windowToDodge: 0.2
+  windowToBackstep: 0.1

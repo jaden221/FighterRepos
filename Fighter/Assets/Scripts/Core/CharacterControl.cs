@@ -12,6 +12,8 @@ public enum TransitionParameter
     Grounded,
     Attack,
     Strafe,
+    DodgeBackward,
+    DodgeForward,
 }
 
 namespace Project.Core
