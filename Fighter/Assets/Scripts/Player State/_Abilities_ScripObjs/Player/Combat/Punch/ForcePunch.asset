@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf28cddd8dc4c48468ba645e394176d6, type: 3}
   m_Name: ForcePunch
   m_EditorClassIdentifier: 
-  TransitionTiming: 0.95
+  TransitionTiming: 1

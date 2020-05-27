@@ -41,7 +41,6 @@ namespace Project.Core
         public float gravityMultiplier;
         public float pullMultiplier;
         public float blockDistance;
-        public float dodgeVelocity;
 
         [Header("Components")]
         [HideInInspector] public Rigidbody myRigidbody;
@@ -78,6 +77,7 @@ namespace Project.Core
                 {
                     col.isTrigger = true;
                     ragdollParts.Add(col);
+                    col.gameObject.AddComponent<TriggerDetector>();
                 }
             }
         }
@@ -158,29 +158,6 @@ namespace Project.Core
             }
         }
 
-        private void OnTriggerEnter(Collider col)
-        {
-            if (ragdollParts.Contains(col)) return;
-            
-            CharacterControl characterControl = col.transform.root.GetComponent<CharacterControl>();
-            if (characterControl == null) return;
-
-            if (col.gameObject == characterControl.gameObject) return;
-
-            if (!collidingParts.Contains(col))
-            {
-                collidingParts.Add(col);
-            }
-        }
-
-        private void OnTriggerExit(Collider col)
-        {
-            if (collidingParts.Contains(col))
-            {
-                collidingParts.Remove(col);
-            }
-        }
-
         public void MoveForward(AnimationCurve speedGraph, AnimatorStateInfo stateInfo, float speed)
         {
             myRigidbody.velocity = transform.forward * speedGraph.Evaluate(stateInfo.normalizedTime) * speed;
@@ -243,11 +220,7 @@ namespace Project.Core
         public bool isBodyPart(Collider col)
         {
             CharacterControl control = col.transform.root.GetComponent<CharacterControl>();
-            if (control == null)
-            {
-                return false;
-            }
-            if (control.gameObject == col.gameObject)
+            if (control == null || control.gameObject == col.gameObject)
             {
                 return false;
             }

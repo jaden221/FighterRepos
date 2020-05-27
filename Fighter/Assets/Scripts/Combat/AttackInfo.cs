@@ -20,18 +20,17 @@ namespace Project.Combat
         public bool isRegistered;
         public bool isFinished;
 
-        public void ResetInfo(Attack attack)
+        public void ResetInfo(Attack attack, CharacterControl Attacker)
         {
             isRegistered = false;
             isFinished = false;
             attackAbility = attack;
+            attacker = Attacker;
         }
 
-        public void Register(Attack attack, CharacterControl attacker)
+        public void Register(Attack attack)
         {
             isRegistered = true;
-            this.attacker = attacker;
-
             attackAbility = attack;
             colliderNames = attack.colliderNames;
             mustCollide = attack.mustCollide;

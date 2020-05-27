@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a7d6ac68a14bb4c8df7218310af09c, type: 3}
   m_Name: Punch
   m_EditorClassIdentifier: 
-  startAttackTime: 0.2
-  endAttackTime: 0.3
-  colliderNames:
-  - R_wrist
-  deathAnimators: []
+  startAttackTime: 0.7
+  endAttackTime: 0.9
   mustCollide: 1
   mustFaceAttacker: 0
   lethalRange: 0
   maxHits: 1
+  colliderNames:
+  - R_wrist
+  deathAnimators:
+  - {fileID: 9100000, guid: 1c87c26fb3d8554469f7e58781ce4038, type: 2}

@@ -1,8 +1,6 @@
-﻿using System.Collections;
+﻿using Project.Combat;
 using System.Collections.Generic;
 using UnityEngine;
-using Project.Core;
-using Project.Combat;
 
 namespace Project.State
 {
@@ -30,7 +28,7 @@ namespace Project.State
             GameObject obj = Instantiate(Resources.Load("AttackInfo", typeof(GameObject))) as GameObject;
             AttackInfo info = obj.GetComponent<AttackInfo>();
 
-            info.ResetInfo(this);
+            info.ResetInfo(this, characterState.characterControl);
 
             if (!AttackManager.Instance.currentAttacks.Contains(info))
             {
@@ -40,7 +38,7 @@ namespace Project.State
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            RegisterAttack(characterState,animator,stateInfo);
+            RegisterAttack(characterState, animator, stateInfo);
             DeregisterAttack(characterState, animator, stateInfo);
         }
 
@@ -51,9 +49,11 @@ namespace Project.State
 
         public void RegisterAttack(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            // if in attack window
             if (startAttackTime <= stateInfo.normalizedTime && endAttackTime >= stateInfo.normalizedTime)
             {
-                foreach  (AttackInfo info in AttackManager.Instance.currentAttacks)
+                // for every ability
+                foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
                 {
                     if (info == null)
                     {
@@ -62,7 +62,7 @@ namespace Project.State
 
                     if (!info.isRegistered && info.attackAbility == this)
                     {
-                        info.Register(this, characterState.characterControl);
+                        info.Register(this);
                     }
                 }
             }
@@ -72,7 +72,7 @@ namespace Project.State
         {
             if (stateInfo.normalizedTime >= endAttackTime)
             {
-                foreach(AttackInfo info in AttackManager.Instance.currentAttacks)
+                foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
                 {
                     if (info == null)
                     {
@@ -95,7 +95,13 @@ namespace Project.State
                 {
                     AttackManager.Instance.currentAttacks.RemoveAt(i);
                 }
-            } 
+            }
+        }
+
+        public RuntimeAnimatorController GetDeathAnimator()
+        {
+            int index = Random.Range(0, deathAnimators.Count);
+            return deathAnimators[index];
         }
     }
 

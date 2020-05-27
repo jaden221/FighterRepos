@@ -28,10 +28,11 @@ namespace Project.Combat
         {
             foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
             {
-                if (info == null || !info.isRegistered || info.isFinished)
+                if (info == null || !info.isRegistered || info.isFinished || info.currentHits >= info.maxHits || info.attacker == characterControl)
                 {
                     continue;
                 }
+                
                 if (info.mustCollide)
                 {
                     if (isCollided(info))
@@ -60,6 +61,11 @@ namespace Project.Combat
         private void TakeDamage(AttackInfo info)
         {
             Debug.Log(info.attacker.gameObject.name + " hits: " + this.gameObject.name);
+            characterControl.SkinnedMeshAnimator.runtimeAnimatorController = info.attackAbility.GetDeathAnimator();
+            info.currentHits++;
+
+            characterControl.GetComponent<BoxCollider>().enabled = false;
+            characterControl.myRigidbody.useGravity = false;
         }
 
     }
