@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Project.Core;
 
-namespace Project.Combat
+public class AttackManager : Singleton<AttackManager>
 {
-    public class AttackManager : Singleton<AttackManager>
+    public AttackInfo attackInfo;
+
+    private void Awake()
     {
-        public List<AttackInfo> currentAttacks = new List<AttackInfo>();
+        attackInfo = Resources.Load("AttackInfo") as AttackInfo;
     }
 }
-

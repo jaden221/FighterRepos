@@ -1,4 +1,5 @@
-﻿using Project.Combat;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,102 +8,49 @@ namespace Project.State
     [CreateAssetMenu(fileName = "New State", menuName = "States/AbilityData/Attack")]
     public class Attack : StateData
     {
-        [Header("Window of Attack (Percent)")]
-        public float startAttackTime;
-        public float endAttackTime;
+        public bool isRegistered;
+        public bool isFinished;
+        public bool canDmg;
 
-        [Header("Misc Values")]
-        public bool mustCollide;
-        public bool mustFaceAttacker;
-        public float lethalRange;
-        public int maxHits;
+        public float windowMin;
+        public float windowMax;
 
-        [Header("Lists")]
-        public List<string> colliderNames = new List<string>();
-        public List<RuntimeAnimatorController> deathAnimators = new List<RuntimeAnimatorController>();
+        public float damage;
+
+        public string namething;
+
+        public List<string> hitBoxes = new List<string>();
+        List<Collider> HitBoxes = new List<Collider>();
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(TransitionParameter.Attack.ToString(), false);
-
-            GameObject obj = Instantiate(Resources.Load("AttackInfo", typeof(GameObject))) as GameObject;
-            AttackInfo info = obj.GetComponent<AttackInfo>();
-
-            info.ResetInfo(this, characterState.characterControl);
-
-            if (!AttackManager.Instance.currentAttacks.Contains(info))
+            Transform[] allChildren = characterState.characterControl.gameObject.GetComponentsInChildren<Transform>();
+            HitBoxes.Clear();
+            foreach (Transform child in allChildren)
             {
-                AttackManager.Instance.currentAttacks.Add(info);
+                if (hitBoxes.Contains(child.name))
+                {
+                    HitBoxes.Add(child.GetComponent<Collider>());
+                }
             }
+            animator.SetBool(TransitionParameter.Attack.ToString(), false);
+            AttackManager.Instance.attackInfo.ResetInfo(HitBoxes, damage);
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            RegisterAttack(characterState, animator, stateInfo);
-            DeregisterAttack(characterState, animator, stateInfo);
+
+            if (stateInfo.normalizedTime >= windowMin && stateInfo.normalizedTime <= windowMax)
+            {
+                canDmg = true;
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            ClearAttack();
+            
         }
 
-        public void RegisterAttack(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            // if in attack window
-            if (startAttackTime <= stateInfo.normalizedTime && endAttackTime >= stateInfo.normalizedTime)
-            {
-                // for every ability
-                foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
-                {
-                    if (info == null)
-                    {
-                        continue;
-                    }
-
-                    if (!info.isRegistered && info.attackAbility == this)
-                    {
-                        info.Register(this);
-                    }
-                }
-            }
-        }
-
-        public void DeregisterAttack(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            if (stateInfo.normalizedTime >= endAttackTime)
-            {
-                foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
-                {
-                    if (info == null)
-                    {
-                        continue;
-                    }
-                    if (info.attackAbility == this && !info.isFinished)
-                    {
-                        info.isFinished = true;
-                        Destroy(info.gameObject);
-                    }
-                }
-            }
-        }
-
-        public void ClearAttack()
-        {
-            for (int i = 0; i < AttackManager.Instance.currentAttacks.Count; i++)
-            {
-                if (AttackManager.Instance.currentAttacks[i] == null || AttackManager.Instance.currentAttacks[i].isFinished)
-                {
-                    AttackManager.Instance.currentAttacks.RemoveAt(i);
-                }
-            }
-        }
-
-        public RuntimeAnimatorController GetDeathAnimator()
-        {
-            int index = Random.Range(0, deathAnimators.Count);
-            return deathAnimators[index];
-        }
     }
 
 }

@@ -44,12 +44,12 @@ namespace Project.Core
 
         [Header("Components")]
         [HideInInspector] public Rigidbody myRigidbody;
-        [HideInInspector] public Animator SkinnedMeshAnimator;
+        [HideInInspector] public Animator skinnedMeshAnimator;
 
         private void Awake()
         {
             myRigidbody = GetComponent<Rigidbody>();
-            SkinnedMeshAnimator = GetComponent<Animator>();
+            skinnedMeshAnimator = GetComponent<Animator>();
 
             bool switchBack = false;
             if (!IsFacingForward()) switchBack = true;
@@ -87,8 +87,8 @@ namespace Project.Core
             myRigidbody.useGravity = false;
             myRigidbody.velocity = Vector3.zero;
             GetComponent<Collider>().enabled = false;
-            SkinnedMeshAnimator.avatar = null;
-            SkinnedMeshAnimator.enabled = false;
+            skinnedMeshAnimator.avatar = null;
+            skinnedMeshAnimator.enabled = false;
             foreach(Collider col in ragdollParts)
             {
                 if (col.gameObject != this.gameObject)

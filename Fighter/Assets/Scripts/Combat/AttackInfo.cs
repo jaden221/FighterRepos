@@ -1,43 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Project.State;
-using Project.Core;
 
-namespace Project.Combat
+[CreateAssetMenu(fileName = "New State", menuName = "States/AbilityData/AttackInfo")]
+public class AttackInfo : ScriptableObject
 {
-    public class AttackInfo : MonoBehaviour
+    bool isRegistered;
+    bool isFinished;
+    bool canDmg;
+
+    public float damage;
+
+    public List<Collider> hitBoxes = new List<Collider>();
+
+    public void ResetInfo(List<Collider> HitBoxes, float Damage)
     {
-        public CharacterControl attacker = null;
-        public Attack attackAbility;
-        public List<string> colliderNames = new List<string>();
+        isRegistered = false;
+        isFinished = false;
+        canDmg = false;
+        damage = Damage;
+        CopyHitBoxList(HitBoxes);
+    }
 
-        public bool mustCollide;
-        public bool mustFaceAttacker;
-        public float lethalRange;
-        public int maxHits;
-        public int currentHits;
-        public bool isRegistered;
-        public bool isFinished;
-
-        public void ResetInfo(Attack attack, CharacterControl Attacker)
+    private void CopyHitBoxList(List<Collider> HitBoxes)
+    {
+        hitBoxes.Clear();
+        foreach (Collider col in HitBoxes)
         {
-            isRegistered = false;
-            isFinished = false;
-            attackAbility = attack;
-            attacker = Attacker;
+            hitBoxes.Add(col);
         }
-
-        public void Register(Attack attack)
-        {
-            isRegistered = true;
-            attackAbility = attack;
-            colliderNames = attack.colliderNames;
-            mustCollide = attack.mustCollide;
-            mustFaceAttacker = attack.mustFaceAttacker;
-            lethalRange = attack.lethalRange;
-            maxHits = attack.maxHits;
-            currentHits = 0;
-        }
+        Debug.Log("Here now 2");
     }
 }
