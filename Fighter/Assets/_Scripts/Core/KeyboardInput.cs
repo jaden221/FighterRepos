@@ -37,6 +37,7 @@ namespace Project.Core
             {
                 VirtualInputManager.Instance.jump = false;
             }
+
             if (Input.GetKeyDown(KeyCode.J))
             {
                 VirtualInputManager.Instance.attack = true;
@@ -46,13 +47,22 @@ namespace Project.Core
                 VirtualInputManager.Instance.attack = false;
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftControl))
             {
                 VirtualInputManager.Instance.strafe = true;
             }
             else
             {
                 VirtualInputManager.Instance.strafe = false;
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                VirtualInputManager.Instance.run = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.run = false;
             }
         }
     }

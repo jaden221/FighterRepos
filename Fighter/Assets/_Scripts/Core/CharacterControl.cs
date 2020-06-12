@@ -27,6 +27,7 @@ namespace Project.Core
         public bool jump;
         public bool attack;
         public bool strafe;
+        public bool run;
 
         [Header("Gameplay")]
         public float blockDistance;
@@ -67,7 +68,7 @@ namespace Project.Core
             foreach(ColliderStateIdentifier obj in allChildren)
             {
                 colliderStateObjs.Add(obj.colliderStateName.ToString(), obj);
-                //Debug.Log(colliderStateObjs[obj.colliderStateName.ToString()]);
+                
             }
         }
 

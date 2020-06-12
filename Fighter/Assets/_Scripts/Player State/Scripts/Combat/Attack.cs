@@ -8,20 +8,16 @@ namespace Project.State
     [CreateAssetMenu(fileName = "New State", menuName = "States/AbilityData/Attack")]
     public class Attack : StateData
     {
-        public ColliderStateNames ColStateNames;
-
         public float windowMin;
         public float windowMax;
 
         public float damage;
-        public float maxHits;
-        public float timeBetweenHits;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
-            
-            characterState.characterControl.attackInfo.ResetInfo(damage, maxHits, timeBetweenHits);
+            characterState.characterControl.attackInfo.ResetInfo();
+            characterState.characterControl.attackInfo.SetValues(damage);
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

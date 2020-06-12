@@ -12,5 +12,6 @@ namespace Project.Core
         public bool jump;
         public bool attack;
         public bool strafe;
+        public bool run;
     }
 }

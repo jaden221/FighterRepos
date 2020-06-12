@@ -6,20 +6,21 @@ using Project.Core;
 public class TriggerDetectorMelee : MonoBehaviour
 {
     CharacterControl characterControl;
-    List<Transform> hitEnemies = new List<Transform>();
     public Collider colliderSelf;
 
     private void Awake()
     {
         characterControl = transform.root.GetComponent<CharacterControl>();
     }
-    //For self detecting hit on enemy and passing col info to characterControl
-    private void OnTriggerEnter(Collider col)
+
+    private void OnTriggerStay(Collider col)
     {
-        if (colliderSelf.enabled == false || col.transform.root == characterControl.transform || characterControl.attackInfo.canDmg == false || hitEnemies.Contains(col.transform))
+        if (colliderSelf.enabled == false || col.transform.root == characterControl.transform || characterControl.attackInfo.canDmg == false || characterControl.attackInfo.hitEnemies.Contains(col.transform.root))
         {
             return;
         }
+        characterControl.attackInfo.hitEnemies.Add(col.transform.root);
+        col.transform.root.GetComponent<EnemyDamagedData>().damageDetector.TakeDamage(characterControl.attackInfo.damage);
     }
 
     private void OnTriggerExit(Collider col)

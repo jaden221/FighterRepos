@@ -6,6 +6,6 @@ public class DamageDetector : MonoBehaviour
 {
     public void TakeDamage(float damage)
     {
-        Debug.Log("Banana + " + damage);
+        Debug.Log(this.name + " took this amount of damage: " + damage);
     }
 }

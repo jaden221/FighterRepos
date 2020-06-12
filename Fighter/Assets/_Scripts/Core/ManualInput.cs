@@ -34,6 +34,7 @@ namespace Project.Core
             {
                 characterControl.moveLeft = false;
             }
+
             if (VirtualInputManager.Instance.jump)
             {
                 characterControl.jump = true;
@@ -42,6 +43,7 @@ namespace Project.Core
             {
                 characterControl.jump = false;
             }
+
             if (VirtualInputManager.Instance.attack)
             {
                 characterControl.attack = true;
@@ -50,6 +52,7 @@ namespace Project.Core
             {
                 characterControl.attack = false;
             }
+
             if (VirtualInputManager.Instance.strafe)
             {
                 characterControl.strafe = true;
@@ -57,6 +60,15 @@ namespace Project.Core
             else
             {
                 characterControl.strafe = false;
+            }
+
+            if (VirtualInputManager.Instance.run)
+            {
+                characterControl.run = true;
+            }
+            else
+            {
+                characterControl.run = false;
             }
         }
     }
