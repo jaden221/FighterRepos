@@ -29,7 +29,7 @@ namespace Project.Core
                 VirtualInputManager.Instance.moveLeft = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 VirtualInputManager.Instance.jump = true;
             }
@@ -38,7 +38,7 @@ namespace Project.Core
                 VirtualInputManager.Instance.jump = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKey(KeyCode.J))
             {
                 VirtualInputManager.Instance.attack = true;
             }
@@ -63,6 +63,15 @@ namespace Project.Core
             else
             {
                 VirtualInputManager.Instance.run = false;
+            }
+
+            if (Input.GetKey(KeyCode.L))
+            {
+                VirtualInputManager.Instance.beam = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.beam = false;
             }
         }
     }

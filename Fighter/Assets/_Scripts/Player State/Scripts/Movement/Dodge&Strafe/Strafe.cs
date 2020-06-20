@@ -27,7 +27,7 @@ namespace Project.State
                 characterState.characterControl.FaceForward(false);
                 characterState.characterControl.MoveForward(speedGraph, stateInfo, -speed);
             }
-            else if (!characterState.characterControl.strafe)
+            else if (!characterState.characterControl.strafe || characterState.characterControl.isStandingStill())
             {
                 animator.SetBool(TransitionParameter.Strafe.ToString(), false);
             }

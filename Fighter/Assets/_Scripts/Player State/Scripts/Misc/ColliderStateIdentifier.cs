@@ -12,11 +12,21 @@ namespace Project.State
         Jump,
         Fall,
         JumpPrep,
-        Melee1,
-        Melee2,
-        Melee3,
+        Melee1Prep,
+        Melee1Action,
+        Melee1Recovery,
+        Melee2Prep,
+        Melee2Action,
+        Melee2Recovery,
+        Melee3Prep,
+        Melee3Action,
+        Melee3Recovery,
         Strafe,
         Run,
+        Turn,
+        Beam1Prep,
+        Beam1Action,
+        Beam1Recovery,
     }
 }
 
@@ -29,12 +39,9 @@ public class ColliderStateIdentifier : MonoBehaviour
 
     public List<Collider> cols = new List<Collider>();
 
-    //public Transform selfTransformRoot;
-
     private void Awake()
     {
         SetActiveFalse();
-        //selfTransformRoot = transform.root.GetComponent<Transform>();
     }
 
     public void SetActiveTrue()

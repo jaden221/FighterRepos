@@ -70,6 +70,15 @@ namespace Project.Core
             {
                 characterControl.run = false;
             }
+
+            if (VirtualInputManager.Instance.beam)
+            {
+                characterControl.beam = true;
+            }
+            else
+            {
+                characterControl.beam = false;
+            }
         }
     }
 

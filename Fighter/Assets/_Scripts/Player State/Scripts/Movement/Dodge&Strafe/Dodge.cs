@@ -9,7 +9,6 @@ namespace Project.State
     {
         public bool backward = false;
         public bool forward = false;
-        public float animationSpeed;
         public float speedInput;
         public float minTime;
         public float maxTime;
@@ -21,7 +20,7 @@ namespace Project.State
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.speed = animationSpeed;
+            
             if (stateInfo.normalizedTime >= minTime && stateInfo.normalizedTime <= maxTime)
             {
                 if (backward)

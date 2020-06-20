@@ -17,7 +17,7 @@ namespace Project.State
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-           
+            characterState.characterControl.colliderStateObjs[colliderStateNames.ToString()].SetActiveTrue();
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

@@ -14,6 +14,9 @@ public enum TransitionParameter
     Strafe,
     DodgeBackward,
     DodgeForward,
+    TurningRight,
+    TurningLeft,
+    Beam,
 }
 
 namespace Project.Core
@@ -28,6 +31,7 @@ namespace Project.Core
         public bool attack;
         public bool strafe;
         public bool run;
+        public bool beam;
 
         [Header("Gameplay")]
         public float blockDistance;
@@ -35,7 +39,8 @@ namespace Project.Core
         [Header("Components")]
         [HideInInspector] public Rigidbody myRigidbody;
         [HideInInspector] public Animator skinnedMeshAnimator;
-        [HideInInspector] public AttackInfo attackInfo;
+        [HideInInspector] public MeleeAttackInfo meleeAttackInfo;
+        [HideInInspector] public BeamAttackInfo beamAttackInfo;
 
         [Header("Lists")]
         public List<GameObject> groundSpheres;
@@ -51,9 +56,10 @@ namespace Project.Core
         {
             myRigidbody = GetComponent<Rigidbody>();
             skinnedMeshAnimator = GetComponent<Animator>();
-            attackInfo = GetComponent<AttackInfo>();
+            meleeAttackInfo = GetComponent<MeleeAttackInfo>();
+            beamAttackInfo = GetComponent<BeamAttackInfo>();
 
-            TheDictionaryThing();
+            CreateColStateIdentifierDictionary();
 
             bool switchBack = false;
             if (!IsFacingForward()) switchBack = true;
@@ -61,14 +67,13 @@ namespace Project.Core
             if (switchBack) FaceForward(false);
         }
 
-        public void TheDictionaryThing()
+        public void CreateColStateIdentifierDictionary()
         {
             ColliderStateIdentifier[] allChildren = colStates.GetComponentsInChildren<ColliderStateIdentifier>();
 
             foreach(ColliderStateIdentifier obj in allChildren)
             {
-                colliderStateObjs.Add(obj.colliderStateName.ToString(), obj);
-                
+                colliderStateObjs.Add(obj.colliderStateName.ToString(), obj); 
             }
         }
 

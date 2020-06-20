@@ -17,7 +17,6 @@ namespace Project.State
             if (characterState.characterControl.attack)
             {
                 animator.SetBool(TransitionParameter.Attack.ToString(), true);
-                //Debug.Log("Attack true");
             }
         }
 

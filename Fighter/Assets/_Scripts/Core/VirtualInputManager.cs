@@ -13,5 +13,6 @@ namespace Project.Core
         public bool attack;
         public bool strafe;
         public bool run;
+        public bool beam;
     }
 }
